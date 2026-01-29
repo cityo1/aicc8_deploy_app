@@ -13,6 +13,9 @@ app.use(express.json()); // json 형식으로 데이터를 보내줌(파싱)
 app.get('/', (request, response) => {
   response.send('This is the Main App for Deployment');
 });
+
+app.use(require('./routes/getRoutes'));
+
 // 4. listen 설정
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
