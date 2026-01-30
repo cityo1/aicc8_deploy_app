@@ -15,6 +15,8 @@ CREATE TABLE tasks (
 -- 데이터 추가
 INSERT INTO tasks (_id, title, description, date, isCompleted, isImportant, userId) VALUES ('1234', '할일1', '할일1 설명', '2025-08-01', false, false, 'marshall');
 
+INSERT INTO tasks (_id, title, description, date, isCompleted, isImportant, userId) VALUES ('2345', '할일1', '할일1 설명', '2025-08-01', false, false, 'abc');
+
 
 -- 데이터 조회
 SELECT * FROM tasks WHERE userId = 'marshall' ORDER BY created_at DESC(ASC);
