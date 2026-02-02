@@ -4,16 +4,25 @@ import Home from './components/Home';
 import Completed from './components/Completed';
 import Proceeding from './components/Proceeding';
 import Important from './components/Important';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/completed" element={<Completed />} />
-        <Route path="/proceeding" element={<Proceeding />} />
-        <Route path="/important" element={<Important />} />
-      </Routes>
+      <div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/completed" element={<Completed />} />
+          <Route path="/proceeding" element={<Proceeding />} />
+          <Route path="/important" element={<Important />} />
+        </Routes>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={1000}
+          theme="dark"
+        />
+      </div>
     </BrowserRouter>
   );
 };
