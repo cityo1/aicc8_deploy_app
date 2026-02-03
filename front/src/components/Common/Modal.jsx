@@ -83,7 +83,7 @@ const Modal = () => {
     setFormData((prev) => ({
       ...prev,
       // input의 타입이 checked일 경우 checked 값, 아니면 일반 value 값
-      [name]: type === 'checked' ? checked : value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 

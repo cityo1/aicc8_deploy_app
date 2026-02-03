@@ -114,7 +114,7 @@ const Item = ({ task }) => {
               자세히
             </span>
           </h2>
-          {/* 할일 설명 */}
+          {/* 할일 내용 */}
           <p>{cutOverText(description)}</p>
         </div>
         <div className="lower">
