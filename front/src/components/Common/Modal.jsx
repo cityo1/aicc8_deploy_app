@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../redux/slices/modalSlice';
-import { fetchPostItem } from '../../redux/slices/apiSlice';
+import { fetchPostItem, fetchGetItem } from '../../redux/slices/apiSlice';
 import { toast } from 'react-toastify';
 
 const Modal = () => {
@@ -62,6 +62,8 @@ const Modal = () => {
       toast.error('할일 추가에 실패했습니다. 콘솔을 확인해 주세요.');
     }
     handleCloseModal();
+
+    await dispatch(fetchGetItem(user)).unwrap();
   };
   // 입력창 폼
   return (

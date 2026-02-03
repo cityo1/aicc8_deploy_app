@@ -3,12 +3,13 @@
 const express = require('express');
 const cors = require('cors');
 
-require('dotenv').config(); // .env 파일을 불러옴
+require('dotenv').config(); // .env 변수 설정
 
 const app = express();
 
 app.use(cors()); // 크로스 오리진 설정
-app.use(express.json()); // json 형식으로 데이터를 보내줌(파싱)
+app.use(express.json()); // 제이슨 데이터 파싱
+
 // 3. root 설정
 app.get('/', (request, response) => {
   response.send('This is the Main App for Deployment');
@@ -16,8 +17,10 @@ app.get('/', (request, response) => {
 
 app.use(require('./routes/getRoutes'));
 app.use(require('./routes/postRoutes'));
+app.use(require('./routes/updateRoutes'));
+app.use(require('./routes/deleteRoutes'));
 
 // 4. listen 설정
 app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
+  console.log(`Server is Running on port ${process.env.PORT}`);
 });

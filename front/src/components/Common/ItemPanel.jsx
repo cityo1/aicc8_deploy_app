@@ -19,7 +19,7 @@ const ItemPanel = ({ pageTitle }) => {
   // Get Item Data
   const getTasksData = useSelector((state) => state.api.getItemData);
 
-  console.log(getTasksData);
+  // console.log(getTasksData);
 
   useEffect(() => {
     if (!userKey) return;
