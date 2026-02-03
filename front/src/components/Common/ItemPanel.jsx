@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PageTitle from './PageTitle';
 import AddItem from './AddItem';
 import Modal from './Modal';
 import Item from './Item';
 import { fetchGetItem } from '../../redux/slices/apiSlice';
+import { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import LoadingSkeleton from './LoadingSkeleton';
 
 const ItemPanel = ({ pageTitle }) => {
   const dispatch = useDispatch();
+
+  const [loading, setloading] = useState(false);
 
   // Auth Data
   const state = useSelector((state) => state.auth.authData);
@@ -26,9 +31,12 @@ const ItemPanel = ({ pageTitle }) => {
 
     const fetchGetItemsData = async () => {
       try {
+        setloading(true);
         await dispatch(fetchGetItem(userKey)).unwrap();
       } catch (error) {
         console.log('Fail to fetch Items:', error);
+      } finally {
+        setloading(false);
       }
     };
     fetchGetItemsData();
@@ -41,9 +49,19 @@ const ItemPanel = ({ pageTitle }) => {
           {isOpen && <Modal />}
           <PageTitle title={pageTitle} />
           <div className="flex flex-wrap">
-            {getTasksData?.map((task, idx) => (
-              <Item key={idx} task={task} />
-            ))}
+            {loading ? (
+              <SkeletonTheme
+                baseColor="#202020"
+                highlightColor="#444"
+                height="25vh"
+              >
+                <LoadingSkeleton />
+                <LoadingSkeleton />
+                <LoadingSkeleton />
+              </SkeletonTheme>
+            ) : (
+              getTasksData?.map((task, idx) => <Item key={idx} task={task} />)
+            )}
             <AddItem />
           </div>
         </div>

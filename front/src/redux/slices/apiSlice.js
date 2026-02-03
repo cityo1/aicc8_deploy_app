@@ -4,6 +4,7 @@ import {
   GET_TASKS_API_URL,
   UPDATE_COMPLETED_TASK_API_URL,
   DELETE_TASK_API_URL,
+  PUT_TASK_API_URL,
 } from '../../utils/apiUrls';
 
 import {
@@ -11,6 +12,7 @@ import {
   getRequest,
   patchRequest,
   deleteRequest,
+  putRequest,
 } from '../../utils/requests';
 
 /* ====== Common Fetch Thunk Function ====== */
@@ -48,6 +50,16 @@ const deleteItemFetchThunk = (actionType, apiURL) => {
   });
 };
 
+const putTaskFetchThunk = (actionType, apiURL) => {
+  return createAsyncThunk(actionType, async (updateData) => {
+    // console.log(defaultOptions);
+    const options = {
+      body: JSON.stringify(updateData),
+    };
+    return await putRequest(apiURL, options);
+  });
+};
+
 /* ====== Data Fetch Actions ====== */
 
 // Get Item Data Fetch
@@ -74,6 +86,9 @@ export const fetchDeleteItem = deleteItemFetchThunk(
   DELETE_TASK_API_URL
 );
 
+// Put Task Data Fetch
+export const fetchPutTask = putTaskFetchThunk('fetchPutTask', PUT_TASK_API_URL);
+
 /* ====== Handle Fulfilled and Rejected Functions ====== */
 
 const handleFulfilled = (stateKey) => (state, action) => {
@@ -93,6 +108,7 @@ const apiSlice = createSlice({
     getItemData: null,
     updateCompletedData: null,
     deleteItemData: null,
+    putTaskData: null,
   },
   extraReducers: (builder) => {
     builder
@@ -109,7 +125,10 @@ const apiSlice = createSlice({
       .addCase(fetchUpdateCompleted.rejected, handleRejected)
 
       .addCase(fetchDeleteItem.fulfilled, handleFulfilled('deleteItemData'))
-      .addCase(fetchDeleteItem.rejected, handleRejected);
+      .addCase(fetchDeleteItem.rejected, handleRejected)
+
+      .addCase(fetchPutTask.fulfilled, handleFulfilled('putTaskData'))
+      .addCase(fetchPutTask.rejected, handleRejected);
   },
 });
 
