@@ -1,4 +1,5 @@
-const DOMAIN = 'http://localhost:8000';
+const DOMAIN = 'http://3.95.226.145';
+// 인스턴스 주소(aws ec2)
 
 const GET_TASKS_API_URL = `${DOMAIN}/get_tasks`;
 const POST_TASK_API_URL = `${DOMAIN}/post_task`;

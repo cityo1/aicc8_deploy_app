@@ -14,7 +14,7 @@ const Item = ({ task }) => {
   const { _id, title, description, date, iscompleted, isimportant, userid } =
     task;
 
-  console.log(task);
+  // console.log(task);
   const dispatch = useDispatch();
   const [isCompleted, setIsCompleted] = useState(iscompleted);
 
